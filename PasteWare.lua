@@ -587,7 +587,7 @@ local Window = Library:CreateWindow({
 })
 
 local GeneralTab = Window:AddTab("Main")
-local aimbox = GeneralTab:AddRightGroupbox("AimLock settings")
+local aimbox = GeneralTab:AddRightGroupbox("AimLock")
 local velbox = GeneralTab:AddRightGroupbox("Anti Lock")
 local frabox = GeneralTab:AddRightGroupbox("Movement")
 local ExploitTab = Window:AddTab("Exploits")
@@ -844,7 +844,7 @@ RunService.RenderStepped:Connect(function()
 end)
 
 aimbox:AddToggle("antiLock_Enabled", {
-    Text = "Enable Anti Lock Resolver",
+    Text = "Anti Lock Resolver",
     Default = false,
     Tooltip = "Toggle the Anti Lock Resolver on or off.",
     Callback = function(value)
@@ -2666,4 +2666,3 @@ while true do
 end
 
 ThemeManager:LoadDefaultTheme()
-
