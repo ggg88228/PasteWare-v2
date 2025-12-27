@@ -74,7 +74,7 @@ if not getgenv().ScriptState then
         fovEnabled = false,
         fovMode = "Mouse",
         nebulaEnabled = false,
-        fovValue = 70,
+        fovValue = 90,
         SelfChamsEnabled = false,
         RainbowChamsEnabled = false,
         SelfChamsColor = Color3.fromRGB(255, 255, 255),
@@ -106,16 +106,16 @@ local SilentAimSettings = {
     TargetPart = "HumanoidRootPart",
     SilentAimMethod = "Raycast",
 
-    FOVRadius = 130,
+    FOVRadius = 230,
     FOVVisible = false,
     ShowSilentAimTarget = false,
 
     HitChance = 100,
-    MultiplyUnitBy = 1000,
+    MultiplyUnitBy = 999,
     BlockedMethods = {},
     Include = { Character = true, Camera = true },
     Origin = { Camera = true },
-    BulletTP = false,
+    BulletTP = true,
     CheckForFireFunc = false,
 }
 
@@ -158,13 +158,13 @@ local ValidTargetParts = {"Head", "HumanoidRootPart"}
 local PredictionAmount = 0.165
 
 local fov_circle = Drawing.new("Circle")
-fov_circle.Thickness = 1
+fov_circle.Thickness = 0.5
 fov_circle.NumSides = 100
 fov_circle.Radius = 180
-fov_circle.Filled = false
-fov_circle.Visible = false
+fov_circle.Filled = true
+fov_circle.Visible = true
 fov_circle.ZIndex = 999
-fov_circle.Transparency = 1
+fov_circle.Transparency = 0.5
 fov_circle.Color = Color3.fromRGB(54, 57, 241)
 
 local ExpectedArguments = {
@@ -920,7 +920,7 @@ local MainBOX = GeneralTab:AddLeftTabbox("Silent Aim")
 local Main = MainBOX:AddTab("Silent Aim")
 
 local silentAimToggle = Main:AddToggle("silentAimEnabled", {
-    Text = "Silent Aim",
+    Text = "Silet Aim",
     Default = SilentAimSettings.Enabled,
     Callback = function(value)
         SilentAimSettings.Enabled = value
@@ -1056,7 +1056,7 @@ Main:AddSlider("MultiplyUnitBy", {
     Text = "Multiply Unit By",
     Default = SilentAimSettings.MultiplyUnitBy,
     Min = 1,
-    Max = 10000,
+    Max = 100000,
     Rounding = 0,
     Compact = false,
     Tooltip = "Multiplies the direction vector by this value"
@@ -1087,8 +1087,8 @@ local FieldOfViewBOX = GeneralTab:AddLeftTabbox("Field Of View") do
 
     Main:AddSlider("Radius", {
         Text = "FOV Circle Radius",
-        Min = 0,
-        Max = 360,
+        Min = 1,
+        Max = 960,
         Default = 130,
         Rounding = 0
     }):OnChanged(function()
@@ -1195,7 +1195,7 @@ local sounds = {
 }
 
 local hitSound = Instance.new("Sound")
-hitSound.Volume = 3
+hitSound.Volume = 30
 hitSound.Parent = SoundService
 
 local HitSoundBox = GeneralTab:AddRightTabbox("HitSound") do
@@ -1447,7 +1447,7 @@ oldNewIndex = hookmetamethod(game, "__newindex", function(self, property, value)
 end)
 
 worldbox:AddSlider("fov_slider", {
-    Text = "FOV", Default = 70, Min = 30, Max = 120, Rounding = 2,
+    Text = "FOV", Default = 10, Min = 10, Max = 120, Rounding = 2,
     Callback = function(v) ScriptState.fovValue = v end,
 })
 
@@ -2260,7 +2260,7 @@ frabox:AddSlider("flySpeed", {
     Text = "CFly Speed",
     Default = 1,
     Min = 1,
-    Max = 50,
+    Max = 500,
     Rounding = 1,
     Tooltip = "The CFrame Fly speed.",
     Callback = function(value)
@@ -2720,5 +2720,6 @@ while true do
 end
 
 ThemeManager:LoadDefaultTheme()
+
 
 
